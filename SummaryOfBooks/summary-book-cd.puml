@@ -1,0 +1,52 @@
+@startuml "Class Diagram"
+class User <<Entity>> {
+    + name: String
+    + email: String
+    + posts: [Post]
+    + follow(User)
+    + likePost(Post)
+    + rateBook(Book, rating)
+    + register()
+    + login()
+}
+
+class Post <<Entity>> {
+    + user: User
+    + quote: String
+    + book: Book
+    + user: User
+}
+
+class Genre <<Entity>> {
+    + name: String
+
+}
+
+class Book <<Entity>> {
+    + name: String
+    + author: String
+    + genre: Genre
+    + addQuote(quote: String, user: User)
+}
+
+class Rating <<Entity>> {
+    + book: Book
+    + user: User
+    + rating: Integer
+}
+
+class Like <<ValueObject>> {
+    + user: User
+    + post: Post
+}
+
+User "1" -left- "0..*" Book : adds >
+Book "1" -down- "0..*" Post : includes >
+Genre "1" -down- "0..*" Book : includes >
+User "1" -up- "0..*" Like : gives >
+User "1" -left- "0..*" Post : creates >
+Post "0..*" -right- "0..*" Like : receives >
+User "1" -right- "0..*" Rating : rates >
+Book "1" -down- "0..*" Rating : receives >
+
+@enduml
