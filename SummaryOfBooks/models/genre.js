@@ -3,6 +3,8 @@ class Genre{
         this.name = name
   
     }
-
+    static create({name}) {
+        return new Genre(name)
+    }
 }
 module.exports = Genre

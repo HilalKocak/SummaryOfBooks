@@ -1,8 +1,11 @@
+const uuid = require('uuid')
 class User {
-    constructor(name, email, phone) {
+    constructor(id = uuid.v4(), name, email, phone, posts) {
+        this.id = id;
         this.name = name
         this.email = email
         this.phone = phone
+        this.posts = posts
     }
 
 
@@ -24,8 +27,8 @@ class User {
 
     login() {
     }
-    static create({name, email}) {
-        return new User(name, email)
+    static create({id, name, email}) {
+        return new User(id, name, email)
     }
 }
 

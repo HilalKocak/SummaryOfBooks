@@ -9,6 +9,10 @@ class Book {
         const newPost = new Post(user, quote, this);
         user.posts.push(newPost);
     }
+
+    static create({name, author, genre}) {
+        return new Book(name, author, genre)
+    }
 }
 
 module.exports = Book

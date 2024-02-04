@@ -6,6 +6,10 @@ class PostDatabase extends BaseDatabase {
     // constructor() {
     //     super(Post)
     // }
+
+    ratePost(){
+        
+    }
 }
 
 module.exports = new PostDatabase(Post)

@@ -6,6 +6,8 @@ class BookDatabase extends BaseDatabase {
     // constructor() {
     //     super(Post)
     // }
+ 
+
 }
 
 module.exports = new BookDatabase(Book)

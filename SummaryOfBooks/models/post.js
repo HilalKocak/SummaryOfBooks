@@ -1,14 +1,14 @@
 class Post {
-    constructor(user, quote, book) {
+    constructor(quote, book) {
         
-        this.user = user
+
         this.quote = quote
         this.book = book
       
     }
    
-    static create({user, quote, book}) {
-        return new Post(user, quote, book)
+    static create({quote, book}) {
+        return new Post(quote, book)
     }
 }
 
