@@ -1,5 +1,5 @@
 const BaseDatabase = require('./base-database')
-const Book = require('./book')
+const Book = require('../models/book')
 
 
 class BookDatabase extends BaseDatabase {

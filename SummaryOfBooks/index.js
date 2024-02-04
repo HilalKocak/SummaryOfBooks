@@ -1,12 +1,10 @@
 const chalk = require('chalk')
-const User = require('./user')
-const Book = require('./book')
-const Post = require('./post')
+const User = require('./models/user')
+const Book = require('./models/book')
+const Post = require('./models/post')
+const Genre = require('./models/genre')
 
-const Genre = require('./genre')
-const userDatabase = require('./user-database')
-const postDatabase = require('./post-database')
-
+const {userDatabase, postDatabase, genreDatabase, bookDatabase} = require('./database') 
 
 const user1 = new User("Hilal", "dffd", "23233")
 const genre1 = new Genre("Fantasy");
@@ -21,7 +19,9 @@ console.log(chalk.gray(book1.genre.name));
 
 const user2 = new User("Arife", "23233")
 const user3 = new User("Ayse", "23233")
-
+genreDatabase.save([genre1]);
+postDatabase.save([post1]);
+bookDatabase.save([book1]);
 
 // db.save('newfile', [user1])
 

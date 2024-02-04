@@ -1,5 +1,5 @@
 const BaseDatabase = require('./base-database')
-const Genre = require('./genre')
+const Genre = require('../models/genre')
 
 
 class GenreDatabase extends BaseDatabase {
