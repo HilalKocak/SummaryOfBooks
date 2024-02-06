@@ -18,28 +18,41 @@ console.log(chalk.gray(book1.genre.name));
 
 const user2 = new User(undefined, "Arife", "23233")
 const user3 = new User(undefined,"Ayse", "23233")
-genreDatabase.save([genre1]);
-bookDatabase.save([book1]);
 
 
 
-function printUserHistory(userId) {
-    const posts = userDatabase.getUserPosts(userId);
+
+async function printUserHistory(userId) {
+    const posts = await userDatabase.getUserPosts(userId);
     // console.log('posts', posts);
     console.log(chalk.yellow(`User Post History (ID: ${userId}):`));
+   
     posts.forEach((post, index) => {
         console.log(chalk.green(`Post ${index + 1}:`), chalk.gray(post.quote));
         
     });
 }
 
-const post1 = new Post("whats going on there", book1);
-postDatabase.save([post1]);
-userDatabase.save([user1]);
-userDatabase.addPostToUser(user1, post1);
-users = userDatabase.load();
 
-users.forEach(user => {
-    console.log('user', user);
-    printUserHistory(user.id);
+
+async function main() {
+    await genreDatabase.save([genre1]);
+    await bookDatabase.save([book1]);
+    const post1 = new Post("whats going on there", book1);
+    await postDatabase.save([post1]);
+    await userDatabase.save([user1]);
+
+    await userDatabase.addPostToUser(user1, post1);
+
+    const users = await userDatabase.load();
+
+    users.forEach(user => {
+        console.log('user', user);
+        printUserHistory(user.id);
+    });
+}
+
+main().catch(err => {
+    console.error(err);
 });
+

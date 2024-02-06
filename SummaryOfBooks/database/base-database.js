@@ -10,21 +10,44 @@ class BaseDatabase{
        
     }
 
-    save(objects){
-        // fs.writeFileSync(`./${filename}.json`, JSON.stringify(objects))
-        fs.writeFileSync(`./${this.filename}.json`, flatted.stringify(objects))
-        console.log('saved')
-    }
+    // save(objects){
+    //     return new Promise((resolve, reject) => {
+    //         fs.writeFile(`./${this.filename}.json`, flatted.stringify(objects))
+            
+    //     }, err => {
+    //         if (err) return reject(err)
+    //         resolve()
+    //     })
+    // }
 
-    load(){
-        const file = fs.readFileSync(`./${this.filename}.json`, 'utf8')
-        const objects = flatted.parse(file)
+    save(objects) {
+        return new Promise((resolve, reject) => {
+            fs.writeFile(`./${this.filename}.json`, flatted.stringify(objects, null, 2), (err) => {
+            if (err) return reject(err)
+            resolve()
+          })
+        })
+      }
+
+    // load(){
+    //     const file = fs.readFileSync(`./${this.filename}.json`, 'utf8')
+    //     const objects = flatted.parse(file)
        
-        return objects.map(this.model.create)
+    //     return objects.map(this.model.create)
+    // }
+
+    load() {
+        return new Promise((resolve, err) => {
+            fs.readFile(`./${this.filename}.json`, 'utf8', (err, file) => {
+               if (err) return reject(err)
+               const objects = flatted.parse(file)
+               resolve(objects.map(this.model.create))
+            })
+        })
     }
 
-    insert(object){
-        const objects = this.load()
+    async insert(object){
+        const objects = await this.load()
         this.save(objects.concat(object))
     }
 

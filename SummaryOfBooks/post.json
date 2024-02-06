@@ -1,1 +1,13 @@
-[["1"],{"quote":"2","book":"3"},"whats going on there",{"name":"4","author":"5","genre":"6","ratings":"7"},"Two Secret Adversary","Agatha Christie",{"name":"8"},[],"Fantasy"]
+[[
+  "1"
+],{
+  "quote": "2",
+  "book": "3"
+},"whats going on there",{
+  "name": "4",
+  "author": "5",
+  "genre": "6",
+  "ratings": "7"
+},"Two Secret Adversary","Agatha Christie",{
+  "name": "8"
+},[],"Fantasy"]
