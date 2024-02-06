@@ -37,10 +37,6 @@ class UserDatabase extends BaseDatabase {
         return user ? user.posts : [];
     }
 
-  
-    
-
-    
 }
 
 module.exports = new UserDatabase(User)
