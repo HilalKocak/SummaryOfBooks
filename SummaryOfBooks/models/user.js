@@ -27,8 +27,8 @@ class User {
 
     login() {
     }
-    static create({id, name, email}) {
-        return new User(id, name, email)
+    static create({id, name, email, phone, posts}) {
+        return new User(id, name, email, phone, posts)
     }
 }
 

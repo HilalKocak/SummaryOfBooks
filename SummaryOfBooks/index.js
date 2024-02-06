@@ -28,7 +28,7 @@ function printUserHistory(userId) {
     // console.log('posts', posts);
     console.log(chalk.yellow(`User Post History (ID: ${userId}):`));
     posts.forEach((post, index) => {
-        console.log(chalk.green(`Post ${index + 1}:`), chalk.gray(post.content));
+        console.log(chalk.green(`Post ${index + 1}:`), chalk.gray(post.quote));
         
     });
 }
@@ -41,5 +41,5 @@ users = userDatabase.load();
 
 users.forEach(user => {
     console.log('user', user);
-    // printUserHistory(user.id);
+    printUserHistory(user.id);
 });

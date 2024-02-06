@@ -1,7 +1,5 @@
 class Post {
     constructor(quote, book) {
-        
-
         this.quote = quote
         this.book = book
       
