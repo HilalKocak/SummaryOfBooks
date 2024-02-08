@@ -1,7 +1,25 @@
 {
+  "name": "summaryofbooks",
+  "version": "1.0.0",
+  "main": "index.js",
   "dependencies": {
+    "ansi-styles": "^4.3.0",
     "body-parser": "^1.20.2",
+    "chalk": "^4.1.2",
+    "color-convert": "^2.0.1",
+    "color-name": "^1.1.4",
     "express": "^4.18.2",
-    "pug": "^3.0.2"
-  }
+    "flatted": "^3.2.9",
+    "has-flag": "^4.0.0",
+    "pug": "^3.0.2",
+    "supports-color": "^7.2.0",
+    "uuid": "^9.0.1"
+  },
+  "scripts": {
+    "watch": "nodemon --ignore '*.json'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
