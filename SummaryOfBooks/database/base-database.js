@@ -10,15 +10,6 @@ class BaseDatabase{
        
     }
 
-    // save(objects){
-    //     return new Promise((resolve, reject) => {
-    //         fs.writeFile(`./${this.filename}.json`, flatted.stringify(objects))
-            
-    //     }, err => {
-    //         if (err) return reject(err)
-    //         resolve()
-    //     })
-    // }
 
     save(objects) {
         return new Promise((resolve, reject) => {
@@ -29,12 +20,7 @@ class BaseDatabase{
         })
       }
 
-    // load(){
-    //     const file = fs.readFileSync(`./${this.filename}.json`, 'utf8')
-    //     const objects = flatted.parse(file)
-       
-    //     return objects.map(this.model.create)
-    // }
+
 
     load() {
         return new Promise((resolve, err) => {
