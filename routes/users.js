@@ -13,7 +13,7 @@ router.get('/', async(req, res)=> {
 router.get('/:userId', async(req, res)=> {
     const user = await userDatabase.find(req.params.userId)
     if (!user) return res.status(404).send('Can not find user')
-    res.render('users', {user}) // users.pug
+    res.render('books_posts', {user}) // books_posts.pug
 })
 
 module.exports = router
