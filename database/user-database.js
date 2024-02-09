@@ -29,6 +29,29 @@ class UserDatabase extends BaseDatabase {
     
         await this.save(objects);
     }
+
+    async addBookToUser(user, book) {
+        const objects = await this.load();
+    
+        if (!Array.isArray(objects)) {
+            throw new Error('Loaded data is not an array.');
+        }
+    
+        const index = objects.findIndex(o => o.id === user.id);
+    
+        if (index === -1) {
+            throw new Error(`Cannot find ${this.model.name} instance with id ${user.id}`);
+        }
+    
+        if (!objects[index].books) {
+            objects[index].books = [];
+        }
+    
+        objects[index].books.push(book);
+    
+        await this.save(objects);
+
+    }
     
 
     async getUserPosts(userId) {

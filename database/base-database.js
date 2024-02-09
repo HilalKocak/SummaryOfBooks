@@ -42,6 +42,14 @@ class BaseDatabase{
         objects.splice(index, 1);
         this.save(objects)
     }
+    async find(id) {
+        const objects = await this.load()
+        return objects.find(o => o.id == id)
+      }
+    
+    async findBy(property, value) {
+        return (await this.load()).find(o => o[property] == value)
+    }
 
 
 }

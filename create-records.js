@@ -7,7 +7,7 @@ const {userDatabase, postDatabase, genreDatabase, bookDatabase} = require('./dat
 
 const user1 = new User(undefined, "Hilal", "dffd", "23233")
 const genre1 = new Genre("Fantasy");
-const book1 = new Book("Two Secret Adversary", "Agatha Christie", genre1, user1);
+const book1 = new Book("Two Secret Adversary", "Agatha Christie", genre1);
 
 
 
@@ -36,12 +36,17 @@ async function printUserHistory(userId) {
 
 async function main() {
     await genreDatabase.save([genre1]);
+
     await bookDatabase.save([book1]);
     const post1 = new Post("whats going on there", book1);
     await postDatabase.save([post1]);
     await userDatabase.save([user1]);
+    
+
+    
 
     await userDatabase.addPostToUser(user1, post1);
+    await userDatabase.addBookToUser(user1, book1);
 
     const users = await userDatabase.load();
 
