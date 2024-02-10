@@ -4,10 +4,10 @@ block content
     p #{user.name}
 
     h3 Books 
-    if user.books.length 
+    if user.books
         ol
             each book in user.books
                 li #{book.name}
                 
     else 
-        p No bookings
+        p No books

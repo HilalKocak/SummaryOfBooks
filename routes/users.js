@@ -28,4 +28,13 @@ router.post('/', async(req, res)=> {
     res.send(user)
 })
 
+
+/*
+axios.delete('/passengers/03e1a19-a1f2-4954-ae8d-e123a4b6aee8').then(res=> res.data).then(console.log).catch(console.log)
+ */
+router.delete('/:userId', async(req, res) => {
+    await passengerDatabase.removeBy('userId', req.params.userId)
+    res.send('OK')
+})
+
 module.exports = router
