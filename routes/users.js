@@ -30,10 +30,16 @@ router.post('/', async(req, res)=> {
 
 
 /*
-axios.delete('/passengers/03e1a19-a1f2-4954-ae8d-e123a4b6aee8').then(res=> res.data).then(console.log).catch(console.log)
+axios.delete('/users/1964ea81-f6db-42e7-b46c-ebbe7f4b6dff')
+  .then(res => {
+    console.log(res.data); 
+  })
+  .catch(err => {
+    console.error(err); 
+  });
  */
 router.delete('/:userId', async(req, res) => {
-    await passengerDatabase.removeBy('userId', req.params.userId)
+    await userDatabase.removeBy('id', req.params.userId)
     res.send('OK')
 })
 
