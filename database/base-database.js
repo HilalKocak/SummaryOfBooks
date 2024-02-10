@@ -35,6 +35,7 @@ class BaseDatabase{
     async insert(object){
         const objects = await this.load()
         this.save(objects.concat(object))
+        console.log('success success success')
     }
 
     remove(index){

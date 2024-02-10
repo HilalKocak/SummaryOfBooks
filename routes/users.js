@@ -16,4 +16,16 @@ router.get('/:userId', async(req, res)=> {
     res.render('books_posts', {user}) // books_posts.pug
 })
 
+/*
+axios.post('http://localhost:3000/users', { name: "Hilal", email: 'ab@com', phone: 232322})
+  .then(res => console.log(res.data))
+  .catch(err => console.error(err));
+*/
+
+router.post('/', async(req, res)=> {
+    console.log("req.body burada", req.body)
+    const user = await userDatabase.insert(req.body);
+    res.send(user)
+})
+
 module.exports = router
