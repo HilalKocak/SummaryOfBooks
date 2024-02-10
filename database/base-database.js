@@ -55,7 +55,7 @@ class BaseDatabase{
         objects.splice(index, 1)
         await this.save(objects)
       }
-      
+
     async find(id) {
         const objects = await this.load()
         return objects.find(o => o.id == id)
@@ -63,6 +63,18 @@ class BaseDatabase{
     
     async findBy(property, value) {
         return (await this.load()).find(o => o[property] == value)
+    }
+
+
+    async update(object) {
+        const objects = await this.load()
+
+        const index = objects.findIndex(o => o.id == object.id)
+
+        if (index == -1) throw new Error(`Cannot find ${this.model.name} instance with id ${object.id}`)
+
+        objects.splice(index, 1, object)
+        await this.save(objects)
     }
 
 

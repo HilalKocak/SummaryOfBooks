@@ -1,6 +1,8 @@
 const flatted = require('flatted')
 const User = require('../models/user')
 const {userDatabase, postDatabase, genreDatabase, bookDatabase} = require('../database') 
+const Book = require('../models/book')
+const Genre = require('../models/genre')
 
 const router = require('express').Router()
 
@@ -41,6 +43,31 @@ axios.delete('/users/1964ea81-f6db-42e7-b46c-ebbe7f4b6dff')
 router.delete('/:userId', async(req, res) => {
     await userDatabase.removeBy('id', req.params.userId)
     res.send('OK')
+})
+
+//update
+/* 
+axios.post('/users/9ace9eeb-b81a-41f5-be8b-ae1e8f46e27f/book', {
+  name: 'Pragmatic Programmer',
+  author: 'David Thomas',
+  genre: 'Computer Science'
+})
+  .then(res => console.log(res.data))
+  .catch(err => console.log(err));
+*/
+
+router.post('/:userId/book', async(req, res)=> {
+    const id = req.params.userId
+    const user = await userDatabase.find(id)
+
+    const { name, author, genre } = req.body
+    const objectGenre = new Genre(genre)
+    const book = new Book(name, author, objectGenre);
+
+    await userDatabase.addBookToUser(user, book);
+    await userDatabase.update(user)
+    res.send(flatted.stringify(user))
+
 })
 
 module.exports = router
