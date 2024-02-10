@@ -7,3 +7,8 @@
 
 #### Uml Diagram using PUML
 ![Uml Diagram](summary-book-cd.png)
+
+- API's created with **Express** 
+- The template of the website was created dynamically with **Pug**(component based)
+- **Axios** is used to make requests from frontend to backend
+
