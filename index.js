@@ -4,6 +4,7 @@ const express = require('express')
 const usersRouter = require('./routes/users')
 
 const indexRouter = require('./routes/index')
+require('./mongo-connection')
 const bodyParser = require('body-parser')
 
 const app = express()

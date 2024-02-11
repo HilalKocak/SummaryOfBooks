@@ -12,11 +12,13 @@
     "express": "^4.18.2",
     "flatted": "^3.2.9",
     "has-flag": "^4.0.0",
+    "mongoose": "^8.1.1",
     "pug": "^3.0.2",
     "supports-color": "^7.2.0",
     "uuid": "^9.0.1"
   },
   "scripts": {
+    "start": "node index.js",
     "watch": "nodemon --ignore '*.json'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
