@@ -70,4 +70,14 @@ router.post('/:userId/book', async(req, res)=> {
 
 })
 
+
+// change one property of one record
+router.patch('/:userId', async (req, res) => {
+  const { userId }= req.params.userId
+  const {name} = req.body
+
+  await userDatabase.update( userId, { name })
+})
+
+
 module.exports = router

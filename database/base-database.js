@@ -6,8 +6,6 @@ const flatted = require('flatted')
 class BaseDatabase{
     constructor(model) {
         this.model = model;
-        this.filename = model.name.toLowerCase();
-       
     }
 
 
@@ -42,16 +40,10 @@ class BaseDatabase{
       }
 
 
-    async update(object) {
-        const objects = await this.load()
-
-        const index = objects.findIndex(o => o.id == object.id)
-
-        if (index == -1) throw new Error(`Cannot find ${this.model.name} instance with id ${object.id}`)
-
-        objects.splice(index, 1, object)
-        await this.save(objects)
-    }
+      async update(id, object) {
+        return this.model.findByIdAndUpdate(id, object)
+       
+      }
 
 
 }
