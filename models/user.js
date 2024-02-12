@@ -1,36 +1,50 @@
 const uuid = require('uuid')
-class User {
-    constructor(id = uuid.v4(), name, email, phone, posts, books) {
-        this.id = id;
-        this.name = name
-        this.email = email
-        this.phone = phone
-        this.posts = posts
-        this.books = books
-    }
+
+const mongoose = require('mongoose')
+const UserSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
+  posts: [],
+  books: []
+});
+
+module.exports = mongoose.model('User', UserSchema)
 
 
-    follow(user) {
-        this.following.push(user);
-    }
 
-    likePost(post) {
-        post.likes++;
-    }
+// class User {
+//     constructor(id = uuid.v4(), name, email, phone, posts, books) {
+//         this.id = id;
+//         this.name = name
+//         this.email = email
+//         this.phone = phone
+//         this.posts = posts
+//         this.books = books
+//     }
 
-    rateBook(book, rating) {
-        const ratingObject = new Rating(book, this, rating);
-        book.ratings.push(ratingObject);
-    }
 
-    register() {
-    }
+//     follow(user) {
+//         this.following.push(user);
+//     }
 
-    login() {
-    }
-    static create({id, name, email, phone, posts, books}) {
-        return new User(id, name, email, phone, posts, books)
-    }
-}
+//     likePost(post) {
+//         post.likes++;
+//     }
 
-module.exports = User
+//     rateBook(book, rating) {
+//         const ratingObject = new Rating(book, this, rating);
+//         book.ratings.push(ratingObject);
+//     }
+
+//     register() {
+//     }
+
+//     login() {
+//     }
+//     static create({id, name, email, phone, posts, books}) {
+//         return new User(id, name, email, phone, posts, books)
+//     }
+// }
+
+// module.exports = User

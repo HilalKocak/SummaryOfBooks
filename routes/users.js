@@ -41,7 +41,7 @@ axios.delete('/users/1964ea81-f6db-42e7-b46c-ebbe7f4b6dff')
   });
  */
 router.delete('/:userId', async(req, res) => {
-    await userDatabase.removeBy('id', req.params.userId)
+    await userDatabase.removeBy('_id', req.params.userId)
     res.send('OK')
 })
 

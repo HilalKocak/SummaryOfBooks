@@ -1,0 +1,15 @@
+POST http://localhost:3000/users HTTP/1.1
+content-type: application/json
+
+{"name":"mongodb try 2", "email":"ab@com", "phone":1213}
+
+###
+
+GET http://localhost:3000/users/65c9d7b816b605025a5c08ef HTTP/1.1
+
+
+###
+DELETE http://localhost:3000/users/65c9d7b816b605025a5c08ef HTTP/1.1
+
+
+

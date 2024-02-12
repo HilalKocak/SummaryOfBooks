@@ -12,58 +12,34 @@ class BaseDatabase{
 
 
     save(objects) {
-        return new Promise((resolve, reject) => {
-            fs.writeFile(`./${this.filename}.json`, flatted.stringify(objects, null, 2), (err) => {
-            if (err) return reject(err)
-            resolve()
-          })
-        })
-      }
-
-
+      return this.model.insertMany(objects)
+    }
 
     load() {
-        return new Promise((resolve, err) => {
-            fs.readFile(`./${this.filename}.json`, 'utf8', (err, file) => {
-               if (err) return reject(err)
-               const objects = flatted.parse(file)
-               resolve(objects.map(this.model.create))
-            })
-        })
+      return this.model.find()
     }
 
-    async insert(object){
-        const objects = await this.load()
-        if(!(object instanceof this.model)){
-          object = this.model.create(object)
-        }
-       
-        await this.save(objects.concat(object))
-        return object
+    async insert(object) {
+      return await this.model.create(object)
+   
+     }
+   
+
+    
+
+     async removeBy(property, value) {
+      return this.model.deleteOne({ [property]: value })
+  
     }
 
-    remove(index){
-        const objects = this.load()
-        objects.splice(index, 1);
-        this.save(objects)
-    }
-
-    async removeBy(property, value) {
-        const objects = await this.load()
-        const index = objects.findIndex(o => o[property] == value)
-        if (index == -1) throw new Error(`Cannot find ${this.model.name} instance with id ${value}`)
-        objects.splice(index, 1)
-        await this.save(objects)
-      }
-
-    async find(id) {
-        const objects = await this.load()
-        return objects.find(o => o.id == id)
+      async find(id) {
+        // return this.model.find({ _id: id})
+        return this.model.findById(id)
       }
     
-    async findBy(property, value) {
-        return (await this.load()).find(o => o[property] == value)
-    }
+      async findBy(property, value) {
+        return this.model.find({ [property]: value })
+      }
 
 
     async update(object) {
