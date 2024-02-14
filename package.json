@@ -13,6 +13,7 @@
     "flatted": "^3.2.9",
     "has-flag": "^4.0.0",
     "mongoose": "^8.1.1",
+    "mongoose-autopopulate": "^1.1.0",
     "pug": "^3.0.2",
     "supports-color": "^7.2.0",
     "uuid": "^9.0.1"

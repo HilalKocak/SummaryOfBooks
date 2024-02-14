@@ -1,14 +1,22 @@
-const uuid = require('uuid')
 
 const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
   name: String,
   email: String,
   phone: String,
-  posts: [],
-  books: []
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+    autopopulate: true
+  }],
+  books: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book',
+    autopopulate: true
+  }]
 });
 
+PassengerSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('User', UserSchema)
 
 
