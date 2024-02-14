@@ -1,8 +1,9 @@
 const mongoose = require('mongoose')
-const GenreSchema = new mongoose.Schema({
+const { Schema } = mongoose; 
+const GenreSchema = new Schema({
   name: String,
 });
 
-PostSchema.plugin(require('mongoose-autopopulate'));
+GenreSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('Genre', GenreSchema)
 

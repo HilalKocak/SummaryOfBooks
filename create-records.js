@@ -3,7 +3,7 @@ const Book = require('./models/book')
 const Post = require('./models/post')
 const Genre = require('./models/genre')
 const chalk = require('chalk')
-const {userDatabase, postDatabase, genreDatabase, bookDatabase} = require('./database') 
+const {userService, postService, genreService, bookService} = require('./service') 
 
 const user1 = new User(undefined, "Hilal", "dffd", "23233")
 const genre1 = new Genre("Fantasy");
@@ -22,7 +22,7 @@ const user3 = new User(undefined,"Ayse", "23233")
 
 
 async function printUserHistory(userId) {
-    const posts = await userDatabase.getUserPosts(userId);
+    const posts = await userService.getUserPosts(userId);
     // console.log('posts', posts);
     console.log(chalk.yellow(`User Post History (ID: ${userId}):`));
    
@@ -35,20 +35,20 @@ async function printUserHistory(userId) {
 
 
 async function main() {
-    await genreDatabase.save([genre1]);
+    await genreService.save([genre1]);
 
-    await bookDatabase.save([book1]);
+    await bookService.save([book1]);
     const post1 = new Post("whats going on there", book1);
-    await postDatabase.save([post1]);
-    await userDatabase.save([user1]);
+    await postService.save([post1]);
+    await userService.save([user1]);
     
 
     
 
-    await userDatabase.addPostToUser(user1, post1);
-    await userDatabase.addBookToUser(user1, book1);
+    await userService.addPostToUser(user1, post1);
+    await userService.addBookToUser(user1, book1);
 
-    const users = await userDatabase.load();
+    const users = await userService.load();
 
     users.forEach(user => {
         console.log('user', user);

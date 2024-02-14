@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://127.0.0.1:27017/test');
+mongoose.connect('mongodb://127.0.0.1:27017/book-test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'))

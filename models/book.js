@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const BookSchema = new mongoose.Schema({
+const { Schema } = mongoose; 
+const BookSchema = new Schema({
   name: String,
   author: String,
   ratings: [],
@@ -16,13 +17,10 @@ BookSchema.methods.addQuote = function(quote, user) {
       user: user._id
     };
     
-
     this.posts.push(newQuote);
-    
-
     return this.save();
   };
   
-PostSchema.plugin(require('mongoose-autopopulate'));
-module.exports = mongoose.model('Post', BookSchema)
+BookSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Book', BookSchema)
 

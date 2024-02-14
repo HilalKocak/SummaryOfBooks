@@ -1,8 +1,8 @@
-const BaseDatabase = require('./base-database')
+const BaseService = require('./base-service')
 const Post = require('../models/post')
 
 
-class PostDatabase extends BaseDatabase {
+class PostService extends BaseService {
     // constructor() {
     //     super(Post)
     // }
@@ -12,4 +12,4 @@ class PostDatabase extends BaseDatabase {
     }
 }
 
-module.exports = new PostDatabase(Post)
+module.exports = new PostService(Post)
