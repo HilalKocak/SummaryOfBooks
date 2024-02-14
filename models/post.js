@@ -1,13 +1,13 @@
-class Post {
-    constructor(quote, book) {
-        this.quote = quote
-        this.book = book
-      
-    }
-   
-    static create({quote, book}) {
-        return new Post(quote, book)
-    }
-}
+const mongoose = require('mongoose')
+const PostSchema = new mongoose.Schema({
+  quote: String,
+  book: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Book',
+    autopopulate: true
+  }]
+});
 
-module.exports = Post
+PostSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Post', PostSchema)
+

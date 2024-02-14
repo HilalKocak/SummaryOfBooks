@@ -1,10 +1,8 @@
-class Genre{
-    constructor(name) {
-        this.name = name
-  
-    }
-    static create({name}) {
-        return new Genre(name)
-    }
-}
-module.exports = Genre
+const mongoose = require('mongoose')
+const GenreSchema = new mongoose.Schema({
+  name: String,
+});
+
+PostSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Genre', GenreSchema)
+

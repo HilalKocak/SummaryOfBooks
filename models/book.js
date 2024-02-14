@@ -1,18 +1,28 @@
-class Book {
-    constructor(name, author, genre) {
-        this.name = name
-        this.author = author
-        this.genre = genre
-        this.ratings = [];
-    }
-    addQuote(quote, user) {
-        const newPost = new Post(user, quote, this);
-        user.posts.push(newPost);
-    }
+const mongoose = require('mongoose')
+const BookSchema = new mongoose.Schema({
+  name: String,
+  author: String,
+  ratings: [],
+  genre: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Genre',
+    autopopulate: true
+  }]
+});
 
-    static create({name, author, genre}) {
-        return new Book(name, author, genre)
-    }
-}
+BookSchema.methods.addQuote = function(quote, user) {
+    const newQuote = {
+      quote: quote,
+      user: user._id
+    };
+    
 
-module.exports = Book
+    this.posts.push(newQuote);
+    
+
+    return this.save();
+  };
+  
+PostSchema.plugin(require('mongoose-autopopulate'));
+module.exports = mongoose.model('Post', BookSchema)
+
