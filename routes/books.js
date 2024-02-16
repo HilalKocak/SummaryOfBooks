@@ -9,12 +9,14 @@ const router = require('express').Router()
 
 router.get('/', async(req, res)=> {
     const books = await bookService.load()
-    res.render('books', {books}) 
+    res.send({books})
+    // res.render('books', {books}) 
 })
 
 router.get('/:bookId', async(req, res)=> {
     const book = await bookService.find(req.params.bookId)
     if (!book) return res.status(404).send('Can not find book')
+    res.send(book)
     // res.render('books_posts', {book}) // books_posts.pug
 })
 
@@ -27,12 +29,13 @@ router.delete('/delete-book/:bookId', async(req, res) => {
 
 
 // change one property of one record
+
 router.patch('/:bookId', async (req, res) => {
-  const { bookId }= req.params.bookId
-  const {name} = req.body
-
-  await bookService.update( bookId, { name })
-})
-
+    const bookId = req.params.bookId;
+    const { name } = req.body;
+  
+    await bookService.update(bookId, { name });
+    res.send('Updated!');
+  });
 
 module.exports = router

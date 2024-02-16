@@ -41,5 +41,15 @@ DELETE http://localhost:3000/books/delete-book/65cfa7b8217d8ab754ee4aba HTTP/1.1
 
 ###
 
+GET http://localhost:3000/books HTTP/1.1
+
+
+###
+
 GET http://localhost:3000/books/65cfa6fc217d8ab754ee4aab HTTP/1.1
 
+###
+PATCH http://localhost:3000/books/65cfa6fc217d8ab754ee4aab HTTP/1.1
+content-type: application/json
+
+{"name": "Js Updated Name"}

@@ -8,8 +8,8 @@ class BaseService{
       return this.model.insertMany(objects)
     }
 
-    load() {
-      return this.model.find()
+    async load() {
+      return await this.model.find()
     }
 
     async insert(object) {
