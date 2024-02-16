@@ -71,3 +71,10 @@ content-type: application/json
 
 {"name": "Updated genre name"}
 
+###
+POST http://localhost:3000/users/65cd25a57b35ae2c83f87f3d/post HTTP/1.1
+content-type: application/json
+
+{"quote":"lorem ipsum dolor",
+ "bookId": "65cfa6fc217d8ab754ee4aab"
+}
