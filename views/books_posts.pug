@@ -1,13 +1,13 @@
 extends layout
+
 block content
     h2 User Detail
     p #{user.name}
 
     h3 Books 
-    if user.books
+    if books && books.length > 0
         ol
-            each book in user.books
+            each book in books
                 li #{book.name}
-                
     else 
         p No books

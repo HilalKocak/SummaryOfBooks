@@ -19,9 +19,23 @@ router.get('/:userId', async(req, res)=> {
     res.render('books_posts', {user}) // books_posts.pug
 })
 
+router.get('/:userId/books', async(req, res)=> {
+  try{
+    const { userId } = req.params;
+    const user = await userService.find(userId)
+    if (!user) return res.status(404).send('Can not find user')
+    const books = await Book.find({user:userId});
+    res.render('books_posts', {books, user}) // books_posts.pug
+    console.log(books)
+  } 
+  catch (error) {
+    console.error('Error retrieving books:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+})
+
 
 router.post('/', async(req, res)=> {
-    console.log("req.body burada", req.body)
     const user = await userService.insert(req.body);
     res.send(user)
 })
