@@ -9,21 +9,21 @@ class UserService extends BaseService {
 
     async addPostToUser(userId, post) {
         try {
-            // Kullanıcıyı bul ve posts dizisine yeni gönderiyi ekleyerek güncelle
+            
             const updatedUser = await User.findByIdAndUpdate(
                 userId,
                 { $push: { posts: post } },
-                { new: true } // Güncellenmiş belgeyi döndürmek için {new: true} kullanılır
+                { new: true }
             );
     
-            // Kullanıcı bulunamazsa hata döndür
+            
             if (!updatedUser) {
-                throw new Error('Kullanıcı bulunamadı.');
+                throw new Error('Cannot find user');
             }
     
             return updatedUser;
         } catch (error) {
-            throw new Error('Gönderi eklenirken bir hata oluştu.');
+            throw new Error('Error');
         }
     }
 
@@ -51,22 +51,21 @@ class UserService extends BaseService {
 
     async addGenreToUser(userId, genre) {
         try {
-            // Kullanıcıyı bul
+           
             const user = await User.findById(userId);
 
             if (!user) {
-                throw new Error('Kullanıcı bulunamadı.');
+                throw new Error('Can not find user');
             }
 
-            // Kullanıcının genres dizisine yeni türü ekle
+         
             user.genres.push(genre);
 
-            // Kullanıcıyı kaydet
             await user.save();
 
             return user;
         } catch (error) {
-            throw new Error('Tür eklenirken bir hata oluştu.');
+            throw new Error('Error');
         }
     }
 
