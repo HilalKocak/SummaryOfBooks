@@ -33,7 +33,7 @@ Content-Type: application/json
 POST http://localhost:3000/users/65cd25a57b35ae2c83f87f3d/genre HTTP/1.1
 content-type: application/json
 
-{"name":"Science"}
+{"name":"will delete"}
 
 ###
 DELETE http://localhost:3000/books/delete-book/65cfa7b8217d8ab754ee4aba HTTP/1.1
@@ -61,3 +61,13 @@ GET http://localhost:3000/genres HTTP/1.1
 
 ###
 GET http://localhost:3000/genres/65cf8d01d7b58f27e143d603 HTTP/1.1
+
+### 
+DELETE http://localhost:3000/genres/delete-genre/65cfb090a277ce1e35cce0e8 HTTP/1.1
+
+###
+PATCH http://localhost:3000/genres/65cfb07ba277ce1e35cce0e4 HTTP/1.1
+content-type: application/json
+
+{"name": "Updated genre name"}
+

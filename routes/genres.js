@@ -13,7 +13,7 @@ router.get('/', async(req, res)=> {
     // res.render('genres', {genres}) 
 })
 
-//get user's genres
+//get genre with ID
 router.get('/:genreId', async(req, res)=> {
     const genre = await genreService.find(req.params.genreId)
     if (!genre) return res.status(404).send('Can not find genre')
@@ -21,13 +21,20 @@ router.get('/:genreId', async(req, res)=> {
     
 })
 
-
-
-
-//delete book from user
+//delete genre
 router.delete('/delete-genre/:genreId', async(req, res) => {
     await genreService.removeBy('_id', req.params.genreId)
     res.send('OK')
 })
+
+router.patch('/:genreId', async (req, res) => {
+    const genreId = req.params.genreId;
+    const { name } = req.body;
+  
+    await genreService.update(genreId, { name });
+    res.send('Updated!');
+  });
+
+
 
 module.exports = router
