@@ -56,20 +56,54 @@ axios.post('/users/9ace9eeb-b81a-41f5-be8b-ae1e8f46e27f/book', {
   .catch(err => console.log(err));
 */
 
-router.post('/:userId/book', async(req, res)=> {
-    const id = req.params.userId
-    const user = await userService.find(id)
 
-    const { name, author, genre } = req.body
-    const objectGenre = new Genre(genre)
-    const book = new Book(name, author, objectGenre);
+// Assuming userService and other services are defined elsewhere and imported correctly
 
-    await userService.addBookToUser(user, book);
-    await userService.update(user)
-    res.send(flatted.stringify(user))
+router.post('/:userId/book', async (req, res) => {
+  try {
+      const { userId } = req.params;
+      const { name, author, genreId } = req.body;
 
-})
+    
+      const book = new Book({
+          user: userId,
+          name,
+          author,
+          genre: genreId
+      });
 
+      await book.save();
+      res.status(201).send(book);
+  } catch (error) {
+      res.status(500).send(error.message);
+  }
+});
+
+//add genre to user
+router.post('/:userId/genre', async (req, res) => {
+  try {
+      // Find the user to associate with the genre
+      const user = await userService.find(req.params.userId);
+      if (!user) {
+          return res.status(404).send('User not found');
+      }
+
+      // Create a new genre with the name provided in the request body and associate it with the found user
+      const genre = new Genre({
+          name: req.body.name,
+          user: user._id // Use the user's ID from the userService's find result
+      });
+
+      // Save the new genre to the database
+      await genre.save();
+
+      // Send back the created genre as a response
+      res.status(201).send(genre);
+  } catch (error) {
+      // Handle any errors that occur during the process
+      res.status(500).send({ message: error.message });
+  }
+});
 
 // change one property of one record
 router.patch('/:userId', async (req, res) => {

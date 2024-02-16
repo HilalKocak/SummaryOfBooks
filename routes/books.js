@@ -28,26 +28,21 @@ router.get('/:userId', async(req, res)=> {
 //     "author": "Author Name",
 //     "genre": "Genre Name"
 // }
-router.post('/:userId/book', async (req, res) => {
-    try {
-        const user = await userService.find(req.params.userId);
-        const { name, author, genre } = req.body;
 
-        // Genre modelinden bir nesne oluştur
-        const objectGenre = await Genre.findOne({ name: genre });
-
-        // Yeni kitap nesnesi oluştur
-        const newBook = { name, author, genre: objectGenre };
-        
-
-        // Kullanıcıya kitap ekle
-        await user.addBookToUser(newBook, user);
-        res.send(user);
-    } catch (error) {
-        console.error('Error adding book to user:', error);
-        res.status(500).send({ error: 'Error adding book to user' });
-    }
-});
+// router.post('/:userId/book', async(req, res)=> {
+//     const id = req.params.userId
+//     const user = await userService.find(id)
+  
+//     const { name, author, genre } = req.body
+//     const objectGenre = await Genre.findOne({ name: genre }) // Genre modelinden bir nesne alınır
+//     const book = new Book({ name, author, genre: objectGenre }); // Book modeli mongoose.model() ile oluşturulur
+  
+//     await userService.addBookToUser(user, book);
+//     await userService.update(user)
+//     res.send(flatted.stringify(user))
+//   })
+  
+  
 
 //delete book from user
 router.delete('/delete-book/:bookId', async(req, res) => {

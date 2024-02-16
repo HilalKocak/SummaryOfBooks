@@ -20,11 +20,17 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/users/65cd25b07b35ae2c83f87f3f/book HTTP/1.1
+POST http://localhost:3000/users/65cd25a57b35ae2c83f87f3d/book HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Book Name",
-    "author": "Author Name",
-    "genre": "Genre Name"
+    "name": "Js",
+    "author": "Js author",
+    "genreId": "65cf8d01d7b58f27e143d603"
 }
+
+###
+POST http://localhost:3000/users/65cd25a57b35ae2c83f87f3d/genre HTTP/1.1
+content-type: application/json
+
+{"name":"Science"}

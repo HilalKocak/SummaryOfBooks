@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
 const { Schema } = mongoose; 
 const BookSchema = new Schema({
+  user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        autopopulate: true
+      },
   name: String,
   author: String,
   ratings: [],
-  genre: [{
+  genre: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Genre',
     autopopulate: true
-  }]
+  }
 });
 
 BookSchema.methods.addQuote = function(quote, user) {
