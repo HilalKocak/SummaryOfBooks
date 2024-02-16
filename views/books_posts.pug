@@ -8,6 +8,11 @@ block content
     if books && books.length > 0
         ol
             each book in books
-                li #{book.name}
+                li 
+                a(href=`/users/${user.id}/book/${book.id}/posts`) = #{book.name} 
+                p Author:  #{book.author} 
+                p Genre: #{book.genre.name}
+
+           
     else 
         p No books
