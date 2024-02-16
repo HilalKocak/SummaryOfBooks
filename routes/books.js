@@ -27,9 +27,7 @@ router.delete('/delete-book/:bookId', async(req, res) => {
 })
 
 
-
 // change one property of one record
-
 router.patch('/:bookId', async (req, res) => {
     const bookId = req.params.bookId;
     const { name } = req.body;

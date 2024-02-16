@@ -45,7 +45,6 @@ GET http://localhost:3000/books HTTP/1.1
 
 
 ###
-
 GET http://localhost:3000/books/65cfa6fc217d8ab754ee4aab HTTP/1.1
 
 ###
@@ -53,3 +52,12 @@ PATCH http://localhost:3000/books/65cfa6fc217d8ab754ee4aab HTTP/1.1
 content-type: application/json
 
 {"name": "Js Updated Name"}
+
+
+
+###
+GET http://localhost:3000/genres HTTP/1.1
+
+
+###
+GET http://localhost:3000/genres/65cf8d01d7b58f27e143d603 HTTP/1.1

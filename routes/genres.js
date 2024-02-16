@@ -8,16 +8,17 @@ const Genre = require('../models/genre')
 const router = require('express').Router()
 
 router.get('/', async(req, res)=> {
-    const users = await bookService.load()
-    // res.send(flatted.stringify(users))
-    res.render('users', {users}) // res.render('users', {users:users})
+    const genres = await genreService.load()
+    res.send({genres})
+    // res.render('genres', {genres}) 
 })
 
 //get user's genres
 router.get('/:genreId', async(req, res)=> {
-    const genre = await genreService.find(req.params.userId)
-    if (!user) return res.status(404).send('Can not find genre')
-    res.render('books_posts', {genre}) // books_posts.pug
+    const genre = await genreService.find(req.params.genreId)
+    if (!genre) return res.status(404).send('Can not find genre')
+    res.send(genre)
+    
 })
 
 
