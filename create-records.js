@@ -5,6 +5,7 @@ const Genre = require('./models/genre')
 const chalk = require('chalk')
 const {userService, postService, genreService, bookService} = require('./service') 
 
+const printUserHistory = require('./lib/print-user-history')
 const user1 = new User(undefined, "Hilal", "dffd", "23233")
 const genre1 = new Genre("Fantasy");
 const book1 = new Book("Two Secret Adversary", "Agatha Christie", genre1);
@@ -19,18 +20,6 @@ const user2 = new User(undefined, "Arife", "23233")
 const user3 = new User(undefined,"Ayse", "23233")
 
 
-
-
-async function printUserHistory(userId) {
-    const posts = await userService.getUserPosts(userId);
-    // console.log('posts', posts);
-    console.log(chalk.yellow(`User Post History (ID: ${userId}):`));
-   
-    posts.forEach((post, index) => {
-        console.log(chalk.green(`Post ${index + 1}:`), chalk.gray(post.quote));
-        
-    });
-}
 
 
 
