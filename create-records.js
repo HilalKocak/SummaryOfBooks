@@ -3,7 +3,7 @@ const Book = require('./models/book')
 const Post = require('./models/post')
 const Genre = require('./models/genre')
 const chalk = require('chalk')
-const {userService, postService, genreService, bookService} = require('./service') 
+const {userService, postService, genreService, bookService} = require('./services') 
 
 const printUserHistory = require('./lib/print-user-history')
 const user1 = new User(undefined, "Hilal", "dffd", "23233")
@@ -41,7 +41,7 @@ async function main() {
 
     users.forEach(user => {
         console.log('user', user);
-        printUserHistory(user.id);
+        printUserHistory(user);
     });
 }
 
