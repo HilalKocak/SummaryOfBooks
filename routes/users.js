@@ -1,5 +1,4 @@
-const flatted = require('flatted')
-const User = require('../models/user')
+
 const {userService, postService, genreService, bookService} = require('../services') 
 const Book = require('../models/book')
 const Genre = require('../models/genre')
@@ -57,9 +56,14 @@ router.get('/:userId/book/:bookId/posts', async(req, res)=> {
 
 
 
-router.post('/', async(req, res)=> {
+router.post('/', async(req, res, next)=> {
+  try{
     const user = await userService.insert(req.body);
     res.send(user)
+  }catch(e){
+    next(e)
+  }
+
 })
 
 

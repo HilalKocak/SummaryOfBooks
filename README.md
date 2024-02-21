@@ -14,3 +14,7 @@
 - **Axios** is used to make requests from frontend to backend
 - **MongoDB** and **Mongoose** used to handle service operations
 
+- To test, run
+```
+npm install supertest --save-dev
+```

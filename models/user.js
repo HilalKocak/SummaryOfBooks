@@ -4,16 +4,16 @@ const UserSchema = new Schema({
   name: String,
   email: String,
   phone: String,
-  books: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Book',
-    autopopulate: true
-  }],
-  genres: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Genre',
-    autopopulate: true
-  }]
+  // books: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Book',
+  //   autopopulate: true
+  // }],
+  // genres: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Genre',
+  //   autopopulate: true
+  // }]
 });
 
 UserSchema.plugin(require('mongoose-autopopulate'));

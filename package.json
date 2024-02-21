@@ -20,15 +20,16 @@
     "uuid": "^9.0.1"
   },
   "scripts": {
-    "start": "node index.js",
-    "watch": "nodemon --ignore '*.json'",
+    "start": "node .bin/www",
+    "watch": "nodemon --ignore '*.json' .bin/www",
     "test": "jest --watch",
-    "test-watch": "jest --w"
+    "test-watch": "jest --coverage --verbose --watch"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "supertest": "^6.3.4",
     "test": "^3.3.0"
   }
 }
