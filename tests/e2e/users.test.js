@@ -8,13 +8,14 @@ const Book = require('../../models/book')
 const Genre = require('../../models/genre')
 const Post = require('../../models/post')
 const User = require('../../models/user');
-const { save } = require('../../services/user-service');
+
 
 
 
 describe('User routes', () => {
   let userId;
   let genreId;
+  let bookId;
   beforeAll(async () => {
     mongoose.connect('mongodb://127.0.0.1:27017/book-test');
   });
@@ -90,16 +91,42 @@ describe('User routes', () => {
   });
 
   it('should create a new book for a user', async () => {
-    const newBook = { name: 'New Book', author: 'Author', genreId: `${genreId}` }; // Geçerli bir genreId sağlayın
+    const newBook = { name: 'New Book', author: 'Author', genreId: `${genreId}` }; 
     const response = await request
       .post(`/users/${userId}/book`)
       .send(newBook);
     expect(response.status).toBe(201);
+    bookId = response.body._id;
     console.log("response.body", response.body)
     console.log("newBook", newBook)
     expect(response.body).toMatchObject({name: 'New Book', author: 'Author'});
   });
 
+  it('should get a single book', async () => {
+    const response = await request.get(`/books/${bookId}`);
+    expect(response.status).toBe(200);
+  });
+
+  it('should update a book', async () => {
+    const newName = 'Updated Book Name';
+    const response = await request
+      .patch(`/books/${bookId}`)
+      .send({ name: newName });
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('Updated!');
+
+   
+    const updatedBook = await Book.findById(bookId);
+    expect(updatedBook.name).toBe(newName);
+  });
+
+  it('should delete a book', async () => {
+    const response = await request.delete(`/books/delete-book/${bookId}`);
+    expect(response.status).toBe(200);
+    expect(response.text).toBe('OK');
+  });
+
+  
   it('should delete a user', async () => {
     const response = await request.delete(`/users/${userId}`);
     expect(response.status).toBe(200);

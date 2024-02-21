@@ -9,17 +9,22 @@ const router = require('express').Router()
 
 router.get('/', async(req, res)=> {
     const books = await bookService.load()
-    // res.send({books})
+    res.status(200).send(books);
     res.render('books_posts', {books}) 
     
 })
 
-router.get('/:bookId', async(req, res)=> {
-    const book = await bookService.find(req.params.bookId)
-    if (!book) return res.status(404).send('Can not find book')
-    // res.send(book)
-    res.render('books_posts', {book}) // books_posts.pug
-})
+router.get('/:bookId', async (req, res) => {
+    try {
+        const book = await bookService.find(req.params.bookId);
+        if (!book) return res.status(404).send('Book not found');
+        res.status(200).send(book);
+    } catch (error) {
+        console.error('Error retrieving book:', error);
+        res.status(500).send('Internal server error');
+    }
+});
+
 
 //delete book 
 router.delete('/delete-book/:bookId', async(req, res) => {
