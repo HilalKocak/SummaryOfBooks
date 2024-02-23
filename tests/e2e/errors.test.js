@@ -91,7 +91,8 @@ describe('should handle service errors', ()=> {
       expect(response.status).toBe(404);
       expect(response.text).toBe('User not found');
     });
-    
+
+   
 
 
     

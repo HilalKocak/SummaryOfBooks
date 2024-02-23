@@ -19,17 +19,13 @@ router.get('/:userId', async(req, res)=> {
 })
 
 router.get('/:userId/books', async(req, res)=> {
-  try{
     const { userId } = req.params;
     const user = await userService.find(userId)
     if (!user) return res.status(404).send('Can not find user')
     const books = await Book.find({user:userId});
     res.render('books_posts', {books, user}) // books_posts.pug
     console.log(books)
-  } 
-  catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
+  
 })
 
 
@@ -49,13 +45,10 @@ router.get('/:userId/book/:bookId/posts', async(req, res)=> {
     }
     const posts = await Post.find({ user: userId, book: bookId });
 
+    res.send(posts)
     res.render('post_detail', {book, user, posts})
  
 })
-
-
-
-
 
 router.post('/', async(req, res, next)=> {
   try{
@@ -64,10 +57,7 @@ router.post('/', async(req, res, next)=> {
   }catch(e){
     next(e)
   }
-
 })
-
-
 
 router.delete('/:userId', async(req, res) => {
     await userService.removeBy('_id', req.params.userId)

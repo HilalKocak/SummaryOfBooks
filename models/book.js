@@ -4,7 +4,8 @@ const BookSchema = new Schema({
   user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        autopopulate: true
+        autopopulate: true,
+        required: true
       },
   name: String,
   author: String,
