@@ -18,3 +18,6 @@
 ```
 npm install supertest --save-dev
 ```
+
+- These are tests:
+![tests](test-preview.png)
