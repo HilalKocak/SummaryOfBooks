@@ -12,7 +12,8 @@ const PostSchema = new Schema({
   book: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Book',
-    autopopulate: true
+    autopopulate: true,
+    required: true
   }
 });
 

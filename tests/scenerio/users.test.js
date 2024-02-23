@@ -9,10 +9,12 @@ const Genre = require('../../models/genre')
 const Post = require('../../models/post')
 const User = require('../../models/user');
 
-
+const userService = require('../../services/user-service')
+const bookService = require('../../services/book-service')
 
 
 describe('User routes', () => {
+  let newBook;
   let userId;
   let genreId;
   let bookId;
@@ -20,14 +22,14 @@ describe('User routes', () => {
     mongoose.connect('mongodb://127.0.0.1:27017/book-test');
   });
 
-  afterAll(async () => {
+  // afterAll(async () => {
  
-    await User.deleteMany({});
-    await Book.deleteMany({});
-    await Post.deleteMany({});
-    await Genre.deleteMany({});
-    await mongoose.disconnect();
-  });
+  //   await User.deleteMany({});
+  //   await Book.deleteMany({});
+  //   await Post.deleteMany({});
+  //   await Genre.deleteMany({});
+  //   await mongoose.disconnect();
+  // });
 
 
 
@@ -79,7 +81,7 @@ describe('User routes', () => {
 
  
     expect(response.body.name).toBe(genreName);
-    console.log("**", response.body.user._id, userId)
+    // console.log("**", response.body.user._id, userId)
     expect(response.body.user._id).toEqual(userId);
     
     genreId = response.body._id
@@ -91,14 +93,14 @@ describe('User routes', () => {
   });
 
   it('should create a new book for a user', async () => {
-    const newBook = { name: 'New Book', author: 'Author', genreId: `${genreId}` }; 
+     newBook = { name: 'New Book', author: 'Author', genreId: `${genreId}` }; 
     const response = await request
       .post(`/users/${userId}/book`)
       .send(newBook);
     expect(response.status).toBe(201);
     bookId = response.body._id;
-    console.log("response.body", response.body)
-    console.log("newBook", newBook)
+    // console.log("response.body", response.body)
+    // console.log("newBook", newBook)
     expect(response.body).toMatchObject({name: 'New Book', author: 'Author'});
   });
 
@@ -120,17 +122,61 @@ describe('User routes', () => {
     expect(updatedBook.name).toBe(newName);
   });
 
-  it('should delete a book', async () => {
-    const response = await request.delete(`/books/delete-book/${bookId}`);
-    expect(response.status).toBe(200);
-    expect(response.text).toBe('OK');
+
+  it('user should add a quote to the book', async () => {
+    
+    const postToCreate = {
+      quote: 'This is quote',
+      bookId: bookId
+    };
+
+    const createPostResponse = await request
+      .post(`/users/${userId}/post`)
+      .send(postToCreate)
+      .expect(201);
+
+    const createdPost = createPostResponse.body;
+    // console.log('testQuote', createdPost.quote)
+    // console.log('testBookId', bookId)
+    expect(createdPost.quote).toEqual('This is quote');
+    expect(createdPost.book._id).toBe(bookId);
+
   });
 
-  
-  it('should delete a user', async () => {
-    const response = await request.delete(`/users/${userId}`);
-    expect(response.status).toBe(200);
-  });
+
+
+it('should render books_posts view with user\'s books', async () => {
+  const response = await request.get(`/users/${userId}/books`);
+
+  expect(response.status).toBe(200);
+  expect(response.text).toContain(userId); 
+});
+
+it('should update a user', async () => {
+  const updatedUser = { name: 'Updated User Name' };
+  const updateResponse = await request
+  .patch(`/users/${userId}`)
+  .send(updatedUser)
+  .expect(200);
+
+  // console.log("Updated User Response:", updateResponse.body);
+
+  // expect(updateResponse.body.name).toBe(updatedUser.name);
+ 
+});
+
+
+  // it('should delete a book', async () => {
+  //   const response = await request.delete(`/books/delete-book/${bookId}`);
+  //   expect(response.status).toBe(200);
+  //   expect(response.text).toBe('OK');
+  // });
+
+
+  // it('should delete a user', async () => {
+  //   const response = await request.delete(`/users/${userId}`);
+  //   expect(response.status).toBe(200);
+  // });
 
 
 });

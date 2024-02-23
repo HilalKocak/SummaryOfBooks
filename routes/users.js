@@ -28,31 +28,32 @@ router.get('/:userId/books', async(req, res)=> {
     console.log(books)
   } 
   catch (error) {
-    console.error('Error retrieving books:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 })
 
+
+
 router.get('/:userId/book/:bookId/posts', async(req, res)=> {
-  try{
     const userId = req.params.userId;
     const bookId = req.params.bookId;
     
     const user = await userService.find(userId)
     const book = await bookService.find(bookId)
-    if (!user) return res.status(404).send('Can not find user')
-    if (!book) return res.status(404).send('Can not find book')
-
+    if (!user && !book) {
+      return res.status(404).send('Can not find user and book');
+    } else if (!user) {
+      return res.status(404).send('Can not find user');
+    } else if (!book) {
+      return res.status(404).send('Can not find book');
+    }
     const posts = await Post.find({ user: userId, book: bookId });
 
     res.render('post_detail', {book, user, posts})
  
-  } 
-  catch (error) {
-    console.error('Error retrieving posts:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
 })
+
+
 
 
 
@@ -115,33 +116,33 @@ router.post('/:userId/genre', async (req, res) => {
   }
 });
 
-//add post to user
 router.post('/:userId/post', async (req, res) => {
   try {
-      const user = await userService.find(req.params.userId);
-      if (!user) {
-          return res.status(404).send('User not found');
-      }
+    const user = await userService.find(req.params.userId);
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
 
-      const post = new Post({
-        quote: req.body.quote,
-        user: user._id,
-        book: req.body.bookId
-      });
+    const post = new Post({
+      quote: req.body.quote,
+      user: req.params.userId,
+      book: req.body.bookId
+    });
 
-      await post.save();
-      res.status(201).send(post);
+    await post.save();
+    res.status(201).send(post);
   } catch (error) {
-      res.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message });
   }
 });
 
+
 // change one property of one record
 router.patch('/:userId', async (req, res) => {
-  const { userId }= req.params.userId
-  const {name} = req.body
-
-  await userService.update( userId, { name })
+  const userId = req.params.userId;
+  const { name } = req.body;
+  const updatedUser = await userService.update(userId, { name });
+  res.status(200).json(updatedUser);
 })
 
 

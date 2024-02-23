@@ -13,18 +13,15 @@ const BookSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Genre',
     autopopulate: true
-  }
+  },
+  posts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Post',
+    autopopulate: true
+  }]
 });
 
-BookSchema.methods.addQuote = function(quote, user) {
-    const newQuote = {
-      quote: quote,
-      user: user._id
-    };
-    
-    this.posts.push(newQuote);
-    return this.save();
-  };
+
   
 BookSchema.plugin(require('mongoose-autopopulate'));
 module.exports = mongoose.model('Book', BookSchema)
