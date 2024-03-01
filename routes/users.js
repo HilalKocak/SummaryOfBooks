@@ -8,14 +8,17 @@ const router = require('express').Router()
 
 router.get('/', async(req, res)=> {
     const users = await userService.load()
+    res.send(users)
     // res.send(flatted.stringify(users))
-    res.render('users', {users}) // res.render('users', {users:users})
+    // res.render('users', {users}) // res.render('users', {users:users})
+    
 })
 
 router.get('/:userId', async(req, res)=> {
     const user = await userService.find(req.params.userId)
     if (!user) return res.status(404).send('Can not find user')
-    res.render('books_posts', {user}) // books_posts.pug
+    res.send(user)
+    // res.render('books_posts', {user}) // books_posts.pug
 })
 
 router.get('/:userId/books', async(req, res)=> {

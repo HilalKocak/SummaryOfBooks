@@ -9,10 +9,12 @@ const postsRouter = require('./routes/posts')
 const indexRouter = require('./routes/index')
 require('./mongo-connection')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 const app = express()
 
 app.use(bodyParser.json())
+app.use(cors())
 app.set('view engine', 'pug')
 
 app.use('/users', usersRouter)
