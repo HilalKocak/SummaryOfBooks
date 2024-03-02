@@ -16,7 +16,9 @@ export default {
       await this.addGenre({ userId: this.$route.params.userId, newGenre: this.newGenre });
       this.newGenre = ''; 
       }
+      this.$emit('add-category');
     }
+    
   
   }
 }

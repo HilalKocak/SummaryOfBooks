@@ -1,7 +1,7 @@
 <script>
-import CategoryForm from '../components/CategoryForm.vue';
+import CategoryForm from '../components/GenreForm.vue';
 import BookForm from '../components/BookForm.vue';
-import CategoryList from '../components/CategoryList.vue';
+import CategoryList from '../components/GenreList.vue';
 import BookTable from '../components/BookTable.vue';
 import { mapActions } from 'vuex';
 
@@ -28,7 +28,13 @@ export default {
 },
   methods: {
     ...mapActions(['fetchUser', 'getGenres', 'getBooks']),
- 
+    async updateGenres(){
+        this.genres = await this.$store.dispatch('getGenres', this.$route.params.userId);
+    },
+    async updateBooks(){
+        this.books = await this.$store.dispatch('getBooks', this.$route.params.userId);
+    },
+
   }
 }
 </script>
@@ -38,10 +44,10 @@ export default {
      <h1>{{ user.name }}</h1>
     <div class="container">
         <div class="col-6 px-3">
-        <CategoryForm @add-category="addCategory" />
+        <CategoryForm @add-category="updateGenres" />
       </div>
       <div class="col-6 px-3">
-        <BookForm @add-book="addBook" :genres="genres" />
+        <BookForm @add-book="updateBooks" :genres="genres" />
       </div>
      
     </div>

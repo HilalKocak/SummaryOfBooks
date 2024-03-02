@@ -16,8 +16,11 @@ import { mapActions } from 'vuex';
       await this.addBook({ userId: this.$route.params.userId, title: this.newBook.title, author: this.newBook.author, genreId: this.newBook.genre._id });
       this.newBook.author = ''; 
       this.newBook.title = ''; 
+      this.newBook.genre = '';
       }
+      this.$emit('add-book');
   }
+   
 }
 
   }
@@ -28,7 +31,7 @@ import { mapActions } from 'vuex';
       <input type="text" v-model="newBook.author" placeholder="Author">
       <input type="text" v-model="newBook.title" placeholder="Book">
       <select v-model="newBook.genre">
-      <option disabled value="">Please select a category</option>
+      <option disabled value="">Please select a genre</option>
       <option v-for="genre in genres" :key="genre._id" :value="genre">{{ genre.name }}</option>
       </select>
 

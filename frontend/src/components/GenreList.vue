@@ -11,7 +11,7 @@ export default {
 </script>
 <template>
     <div class="column">
-      <h2>Categories</h2>
+      <h2>Genres</h2>
       <div class="category" v-for="(genre, index) in genres" :key="index">
         <span class="badge">{{ genre.name }}</span>
       </div>
