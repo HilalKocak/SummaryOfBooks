@@ -20,6 +20,12 @@ export default createStore({
     async getGenres({ state }, userId){
       const request = await axios.get(`/users/${userId}/genres`)
       return request.data
+    },
+    async addGenre({ state },  { userId, newGenre }) {
+      const response = await axios.post(`/users/${userId}/genre`, {
+        name: newGenre, user: userId
+      })
+      return response.data
     }
 
   },

@@ -30,9 +30,6 @@ export default {
         this.genres.push(category);
       }
     },
-    getGenres(){
-        
-    },
     addBook(book) {
       if (book && book.title && book.author && book.category) {
         this.books.push(book);

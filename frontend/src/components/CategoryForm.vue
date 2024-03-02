@@ -1,27 +1,32 @@
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
-      newCategory: ''
+      newGenre: ''
     };
   },
+
   methods: {
-    addCategory(userId) {
-    if (this.newCategory !== '') {
-      this.$emit('add-category', this.newCategory);
-      this.newCategory = ''; // Clear input
+    ...mapActions(['addGenre']), // post genre to api
+    async submitNewGenre() {
+    if (this.newGenre.trim()) {
+      await this.addGenre({ userId: this.$route.params.userId, newGenre: this.newGenre });
+      this.newGenre = ''; 
+      }
     }
-  }
+  
   }
 }
 </script>
 
 <template lang="pug">
 .column
-  h2 Add Category
-  input(type='text' v-model='newCategory' placeholder='New category name')
-  button(@click='addCategory') Add
+  h2 Add Genre
+  input(type='text' v-model='newGenre' placeholder='New genre name')
+  button(@click='submitNewGenre') Add
 </template>
   
   
