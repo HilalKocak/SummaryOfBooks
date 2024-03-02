@@ -11,9 +11,17 @@ export default createStore({
   actions: {
     async fetchUsers() {
       const request = await axios.get('/users')
-      console.log('USER', request.data)
+      return request.data
+    },
+    async fetchUser({ state }, userId) {
+      const request = await axios.get(`/users/${userId}`)
+      return request.data
+    },
+    async getGenres({ state }, userId){
+      const request = await axios.get(`/users/${userId}/genres`)
       return request.data
     }
+
   },
   modules: {
 

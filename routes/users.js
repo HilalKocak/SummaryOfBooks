@@ -31,6 +31,22 @@ router.get('/:userId/books', async(req, res)=> {
   
 })
 
+router.get('/:userId/genres', async(req, res) => {
+  const { userId } = req.params;
+  try {
+    const user = await userService.find(userId);
+    if (!user) {
+      return res.status(404).send('Can not find user');
+    }
+    const genres = await Genre.find({ user: userId });
+    res.send(genres);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
+
 
 
 router.get('/:userId/book/:bookId/posts', async(req, res)=> {
@@ -83,7 +99,8 @@ router.post('/:userId/book', async (req, res) => {
       });
 
       await book.save();
-      res.status(201).send(book);
+      res.status(201)
+      res.send(book);
   } catch (error) {
       res.status(500).send(error.message);
   }
@@ -103,7 +120,8 @@ router.post('/:userId/genre', async (req, res) => {
       });
 
       await genre.save();
-      res.status(201).send(genre);
+      res.status(201)
+      res.send(genre);
   } catch (error) {
       res.status(500).send({ message: error.message });
   }
