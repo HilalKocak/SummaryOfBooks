@@ -1,4 +1,5 @@
 <script>
+import { mapActions } from 'vuex';
   export default {
     props: {
     genres: Array 
@@ -9,11 +10,15 @@
       };
     },
     methods: {
-        addBook() {
-    if (this.newBook.author !== '' && this.newBook.title !== '' && this.newBook.category !== '') {
-      this.$emit('add-book', this.newBook);
-      this.newBook = { author: '', title: '', category: '' }; // Clear form
-    }
+    ...mapActions(['addBook']),
+    async addNewBook() {
+      if (this.newBook.author.trim() && this.newBook.title.trim()) {
+      await this.addBook({ userId: this.$route.params.userId, title: this.newBook.title, author: this.newBook.author, genreId: this.newBook.genre._id });
+      this.newBook.author = ''; 
+      this.newBook.title = ''; 
+      }
+      
+  
   }
 }
 
@@ -21,14 +26,14 @@
   </script>
 <template>
     <div class="column">
-      <h2>Add book</h2>
+      <h2>Add Book</h2>
       <input type="text" v-model="newBook.author" placeholder="Author">
       <input type="text" v-model="newBook.title" placeholder="Book">
       <select v-model="newBook.category">
         <option disabled value="">Please select a category</option>
         <option v-for="(genre, index) in genres" :key="index" :value="genre">{{ genre.name }}</option>
       </select>
-      <button @click="addBook">Add</button>
+      <button @click="addNewBook">Add</button>
     </div>
   </template>
   

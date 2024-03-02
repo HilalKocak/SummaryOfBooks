@@ -26,9 +26,9 @@ router.get('/:userId/books', async(req, res)=> {
     const user = await userService.find(userId)
     if (!user) return res.status(404).send('Can not find user')
     const books = await Book.find({user:userId});
-    res.render('books_posts', {books, user}) // books_posts.pug
-    console.log(books)
-  
+    // res.render('books_posts', {books, user}) // books_posts.pug
+    res.send(books)
+
 })
 
 router.get('/:userId/genres', async(req, res) => {
@@ -89,18 +89,16 @@ router.post('/:userId/book', async (req, res) => {
   try {
       const { userId } = req.params;
       const { name, author, genreId } = req.body;
-
-    
       const book = new Book({
           user: userId,
           name,
           author,
           genre: genreId
       });
-
       await book.save();
       res.status(201)
       res.send(book);
+
   } catch (error) {
       res.status(500).send(error.message);
   }

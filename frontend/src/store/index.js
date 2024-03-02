@@ -21,12 +21,26 @@ export default createStore({
       const request = await axios.get(`/users/${userId}/genres`)
       return request.data
     },
+    async getBooks({ state }, userId){
+      const request = await axios.get(`/users/${userId}/books`)
+      return request.data
+    },
     async addGenre({ state },  { userId, newGenre }) {
       const response = await axios.post(`/users/${userId}/genre`, {
         name: newGenre, user: userId
       })
       return response.data
+    },
+    async addBook({ state },  { userId, title, author, genreId }) {
+      const response = await axios.post(`/users/${userId}/book`, {
+        user: userId,
+        name : title,
+        author,
+        genre: genreId
+      })
+      return response.data
     }
+
 
   },
   modules: {

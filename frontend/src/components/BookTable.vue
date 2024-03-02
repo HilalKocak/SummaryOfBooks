@@ -9,6 +9,10 @@ export default {
       selectedBook: null 
     };
   },
+  mounted() {
+  console.log(this.books);
+},
+
   methods: {
     toggleQuote(index) {
       // When clicked the book
@@ -20,20 +24,20 @@ export default {
 
 <template>
     <div class="column">
-      <h2>Books</h2>
+      <h2>Books ({{books.length }})</h2>
       <table>
         <thead>
           <tr>
             <th>Author</th>
             <th>Book Name</th>
-            <th>Category</th>
+            <th>Genre</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(book, index) in books" :key="index" @click="toggleQuote(index)">
             <td>{{ book.author }}</td>
-            <td>{{ book.title }}</td>
-            <td>{{ book.category }}</td>
+            <td>{{ book.name }}</td>
+            <td>{{ book.genre.name }}</td>
           </tr>
         </tbody>
       </table>
