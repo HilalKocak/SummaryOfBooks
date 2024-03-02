@@ -1,7 +1,7 @@
 <script>
   export default {
     props: {
-    categories: Array 
+    genres: Array 
   },
     data() {
       return {
@@ -26,7 +26,7 @@
       <input type="text" v-model="newBook.title" placeholder="Book">
       <select v-model="newBook.category">
         <option disabled value="">Please select a category</option>
-        <option v-for="(category, index) in categories" :key="index" :value="category">{{ category }}</option>
+        <option v-for="(genre, index) in genres" :key="index" :value="genre">{{ genre.name }}</option>
       </select>
       <button @click="addBook">Add</button>
     </div>

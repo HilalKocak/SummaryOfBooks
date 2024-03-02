@@ -50,7 +50,7 @@ export default {
         <CategoryForm @add-category="addCategory" />
       </div>
       <div class="col-6 px-3">
-        <BookForm @add-book="addBook" :categories="categories" />
+        <BookForm @add-book="addBook" :genres="genres" />
       </div>
      
     </div>
