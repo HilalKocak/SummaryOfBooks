@@ -22,27 +22,22 @@ export default {
 }
 </script>
 
-<template>
-    <div class="column">
-      <h2>Books ({{books.length }})</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Author</th>
-            <th>Book Name</th>
-            <th>Genre</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(book, index) in books" :key="index" @click="toggleQuote(index)">
-            <td>{{ book.author }}</td>
-            <td>{{ book.name }}</td>
-            <td>{{ book.genre?.name }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </template>
+<template lang="pug">
+.column
+  h2 Books ({{books.length }})
+  table
+    thead
+      tr
+        th Author
+        th Book Name
+        th Genre
+    tbody
+      tr(v-for='(book, index) in books', :key='index', @click='toggleQuote(index)')
+        td {{ book.author }}
+        td {{ book.name }}
+        td {{ book.genre.name }}
+ 
+</template>
   
   
   <style scoped>

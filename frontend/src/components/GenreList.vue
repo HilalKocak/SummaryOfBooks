@@ -9,26 +9,27 @@ export default {
 
 }
 </script>
-<template>
-    <div class="column">
-      <h2>Genres</h2>
-      <div class="category" v-for="(genre, index) in genres" :key="index">
-        <span class="badge">{{ genre.name }}</span>
-      </div>
-    </div>
-  </template>
+<template lang="pug">
+h2 Genres
+.category(v-for='(genre, index) in genres', :key='index')
+  span.badge {{ genre.name }}
+</template>
   
 
   
   <style scoped>
-   .badge {
-    display: inline-block;
+ .category {
+    display: flex;
+    display: inline;
+  }
+  .badge {
+    display: inline;
     margin-right: 5px;
     margin-bottom: 5px;
     padding: 5px 10px;
     background-color: #007bff;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 15px;
   }
   </style>
   

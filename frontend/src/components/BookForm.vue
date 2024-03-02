@@ -25,19 +25,18 @@ import { mapActions } from 'vuex';
 
   }
   </script>
-<template>
-    <div class="column">
-      <h2>Add Book</h2>
-      <input type="text" v-model="newBook.author" placeholder="Author">
-      <input type="text" v-model="newBook.title" placeholder="Book">
-      <select v-model="newBook.genre">
-      <option disabled value="">Please select a genre</option>
-      <option v-for="genre in genres" :key="genre._id" :value="genre">{{ genre.name }}</option>
-      </select>
+<template lang="pug">
+.column
+  h2 Add Book
+  input(type='text', v-model='newBook.author', placeholder='Author')
+  input(type='text', v-model='newBook.title', placeholder='Book')
+  select(v-model='newBook.genre')
+    option(disabled='', value='') Please select a genre
+    option(v-for='genre in genres', :key='genre._id', :value='genre') {{ genre.name }}
 
-      <button @click="addNewBook">Add</button>
-    </div>
-  </template>
+  button(@click='addNewBook') Add
+
+</template>
   
   
   
