@@ -33,10 +33,9 @@ export default createStore({
     },
     async addBook({ state },  { userId, title, author, genreId }) {
       const response = await axios.post(`/users/${userId}/book`, {
-        user: userId,
         name : title,
         author,
-        genre: genreId
+        genreId: genreId
       })
       return response.data
     }

@@ -37,7 +37,7 @@ export default {
           <tr v-for="(book, index) in books" :key="index" @click="toggleQuote(index)">
             <td>{{ book.author }}</td>
             <td>{{ book.name }}</td>
-            <td>{{ book.genre.name }}</td>
+            <td>{{ book.genre?.name }}</td>
           </tr>
         </tbody>
       </table>

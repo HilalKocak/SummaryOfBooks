@@ -6,19 +6,17 @@ import { mapActions } from 'vuex';
   },
     data() {
       return {
-        newBook: { author: '', title: '', category: '' },
+        newBook: { author: '', title: '', genre: '' },
       };
     },
     methods: {
     ...mapActions(['addBook']),
     async addNewBook() {
-      if (this.newBook.author.trim() && this.newBook.title.trim()) {
+      if (this.newBook.author.trim() && this.newBook.title.trim() && this.newBook.genre) {
       await this.addBook({ userId: this.$route.params.userId, title: this.newBook.title, author: this.newBook.author, genreId: this.newBook.genre._id });
       this.newBook.author = ''; 
       this.newBook.title = ''; 
       }
-      
-  
   }
 }
 
@@ -29,10 +27,11 @@ import { mapActions } from 'vuex';
       <h2>Add Book</h2>
       <input type="text" v-model="newBook.author" placeholder="Author">
       <input type="text" v-model="newBook.title" placeholder="Book">
-      <select v-model="newBook.category">
-        <option disabled value="">Please select a category</option>
-        <option v-for="(genre, index) in genres" :key="index" :value="genre">{{ genre.name }}</option>
+      <select v-model="newBook.genre">
+      <option disabled value="">Please select a category</option>
+      <option v-for="genre in genres" :key="genre._id" :value="genre">{{ genre.name }}</option>
       </select>
+
       <button @click="addNewBook">Add</button>
     </div>
   </template>

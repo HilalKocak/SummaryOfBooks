@@ -23,20 +23,12 @@ export default {
     this.user = await this.fetchUser(this.$route.params.userId)
     this.genres = await this.$store.dispatch('getGenres', this.$route.params.userId);
     this.books = await this.$store.dispatch('getBooks', this.$route.params.userId);
+
  
 },
   methods: {
     ...mapActions(['fetchUser', 'getGenres', 'getBooks']),
-    addCategory(genre) {
-      if (genre && !this.genres.includes(genre)) {
-        this.genres.push(category);
-      }
-    },
-    addBook(book) {
-      if (book && book.title && book.author && book.category) {
-        this.books.push(book);
-      }
-    }
+ 
   }
 }
 </script>
