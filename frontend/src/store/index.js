@@ -39,10 +39,19 @@ export default createStore({
       })
       return response.data
     },
+    async addPost({ state },  { userId, bookId, quote }) {
+      const response = await axios.post(`/users/${userId}/post`, {
+        quote : quote,
+        bookId: bookId
+      })
+      return response.data
+    },
     async getQuotes({ state }, {userId, bookId}){
-      console.log("00000 bookid", bookId)
       const request = await axios.get(`/users/${userId}/book/${bookId}/posts`)
-      console.log('quotes', request.data)
+      return request.data
+    },
+    async getBook({state}, bookId){
+      const request = await axios.get(`/books/${bookId}`)
       return request.data
     }
 

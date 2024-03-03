@@ -16,9 +16,11 @@ router.get('/', async(req, res)=> {
 
 router.get('/:bookId', async (req, res) => {
     try {
+        console.log("req.params.bookId", req.params.bookId)
         const book = await bookService.find(req.params.bookId);
         if (!book) return res.status(404).send('Book not found');
-        res.status(200).send(book);
+        res.status(200)
+        res.send(book);
     } catch (error) {
         console.error('Error retrieving book:', error);
         res.status(500).send('Internal server error');

@@ -6,35 +6,60 @@ export default {
   data() {
     return {
       user : {},
-      posts:[]
+      posts:[], 
+      newPostContent: '',
+      book : {}
+
  
     }
   },
   
   async mounted() {
     try {
+    await this.updatePosts()
     this.user = await this.$store.dispatch('fetchUser', this.$route.params.userId);
-    this.posts = await this.$store.dispatch('getQuotes', { userId: this.$route.params.userId, bookId: this.$route.params.bookId });
+    this.book = await this.getBook(this.$route.params.bookId)
+ 
   } catch (error) {
     console.error("Error!!", error);
   }
 },
   methods: {
-    ...mapActions(['fetchUser', 'getQuotes']),
-  
+    ...mapActions(['fetchUser', 'getQuotes', 'addPost', 'getBook']),
+    async submitNewPost() {
+    if (this.newPostContent.trim()) {
+      await this.addPost({userId: this.$route.params.userId, bookId:this.$route.params.bookId, quote: this.newPostContent});
+      this.newPostContent = ''; 
+      }
+      this.updatePosts()
+    },
+    async updatePosts(){
+        this.posts = await this.$store.dispatch('getQuotes', { userId: this.$route.params.userId, bookId: this.$route.params.bookId });
+    },
+
+    
   }
 }
 </script>
 
 
 <template lang="pug">
-h1 {{ user.name }} 
+h1 {{ user.name }}'s Quotes of Book: {{ book.name }}
 div
 p There are {{ posts.length }} posts
+div
+    input(type="text" v-model="newPostContent" placeholder="Write a new quote..." class="new-post-input")
+    button(@click="submitNewPost") Send
 ul
 li(v-for="post in posts" :key="post._id")
-   h1 Book: {{ post.book.name }}
    | {{ post.quote }}
 
 
 </template>
+
+<style>
+.new-post-input {
+  width: 100%;
+  max-width: 700px;
+}
+</style>

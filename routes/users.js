@@ -135,10 +135,11 @@ router.post('/:userId/post', async (req, res) => {
       user: req.params.userId,
       book: req.body.bookId
     });
-
     await post.save();
-    res.status(201).send(post);
+    res.status(201)
+    res.send(post);
   } catch (error) {
+    console.error(error); 
     res.status(500).send({ message: error.message });
   }
 });

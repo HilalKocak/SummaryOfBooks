@@ -75,7 +75,7 @@ content-type: application/json
 POST http://localhost:3000/users/65d7a1ae833dd19438f609f4/post HTTP/1.1
 content-type: application/json
 
-{"quote":"Ideas pull the trigger, but instinct loads the gun.",
+{"quote":"The greater danger for most of us lies not in setting our aim too high and falling short; but in setting our aim too low and achieving our mark.",
  "bookId": "65e2eb7051064624cbd11e3c"
 }
 
