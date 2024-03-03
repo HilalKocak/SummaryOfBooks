@@ -46,7 +46,7 @@ h1 {{ user.name }}
     .col-6.px-3(style="flex: 1;")
         CategoryForm(@add-category="updateGenres")
 
-    .col-6.px-3(style="flex: 1;")
+    .col-6.px-3(style="flex: 2;")
         CategoryList(:genres="genres")
         
       
@@ -54,8 +54,8 @@ h1 {{ user.name }}
     .row(style="flex: 1; display: flex;")
         .col.px-1(style="flex: 1;")
           BookForm(@add-book="updateBooks" :genres="genres")
-        .books.px-1(style="flex: 1;")
-            BookTable(:books="books")
+        .col.px-1(style="flex: 2;")
+          BookTable(:books="books")
 </template>
   
   <style>
@@ -65,14 +65,10 @@ h1 {{ user.name }}
 
   }
   
-  .col-6 {
-    flex: 1;
-    padding: 0 15px;
-  }
-  
   .row {
     display: flex;
     width: 100%;
+    margin-top: 0;
   }
   
   .col, .books {
@@ -80,8 +76,6 @@ h1 {{ user.name }}
     padding: 0 15px;
   }
   
-  .col-6, .col, .books {
-    margin-bottom: 20px;
-  }
+
   </style>
   

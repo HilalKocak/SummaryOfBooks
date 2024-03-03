@@ -40,24 +40,34 @@ export default {
   
   
   <style scoped>
-   table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-  }
-  th {
-    background-color: #f2f2f2;
-  }
-  tr:hover {
-    background-color: #f2f2f2;
-    cursor: pointer;
-  }
-  a{
-    text-decoration: none;
-  }
-  </style>
+
+.column {
+
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background-color: #f2f2f2;
+}
+tr:hover {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+a{
+  text-decoration: none;
+}
+</style>
   
