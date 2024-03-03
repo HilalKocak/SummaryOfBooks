@@ -41,25 +41,47 @@ export default {
 
 
 <template lang="pug">
-    
 h1 {{ user.name }}
-.container
-    .col-6.px-3
-    <CategoryForm @add-category="updateGenres" />
+.container(style="display: flex; flex-wrap: wrap;")
+    .col-6.px-3(style="flex: 1;")
+        CategoryForm(@add-category="updateGenres")
 
-    .col-6.px-3
-    <BookForm @add-book="updateBooks" :genres="genres" />
-    
-.container
-    .row
-        .col.px-1
-            <CategoryList :genres="genres" />
-        .col.books.px-1
-            <BookTable :books="books" />
+    .col-6.px-3(style="flex: 1;")
+        CategoryList(:genres="genres")
         
+      
+.container(style="display: flex; flex-wrap: wrap;")
+    .row(style="flex: 1; display: flex;")
+        .col.px-1(style="flex: 1;")
+          BookForm(@add-book="updateBooks" :genres="genres")
+        .books.px-1(style="flex: 1;")
+            BookTable(:books="books")
 </template>
   
   <style>
+  .container {
+    display: flex;
+    flex-wrap: wrap;
 
+  }
+  
+  .col-6 {
+    flex: 1;
+    padding: 0 15px;
+  }
+  
+  .row {
+    display: flex;
+    width: 100%;
+  }
+  
+  .col, .books {
+    flex: 1;
+    padding: 0 15px;
+  }
+  
+  .col-6, .col, .books {
+    margin-bottom: 20px;
+  }
   </style>
   
