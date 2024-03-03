@@ -15,8 +15,7 @@ export default {
 
   methods: {
     toggleQuote(index) {
-      // When clicked the book
-      this.selectedBook = index === this.selectedBook ? null : index;
+      
     }
   }
 }
@@ -32,11 +31,11 @@ export default {
         th Book Name
         th Genre
     tbody
-      tr(v-for='(book, index) in books', :key='index', @click='toggleQuote(index)')
+      tr(v-for='(book, index) in books', :key='index')
         td {{ book.author }}
-        td {{ book.name }}
+        td 
+          a(:href="`/users/${book.user._id}/book/${book._id}/posts`") {{ book.name }}
         td {{ book.genre.name }}
- 
 </template>
   
   
@@ -56,6 +55,9 @@ export default {
   tr:hover {
     background-color: #f2f2f2;
     cursor: pointer;
+  }
+  a{
+    text-decoration: none;
   }
   </style>
   

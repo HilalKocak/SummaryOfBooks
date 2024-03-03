@@ -47,8 +47,6 @@ router.get('/:userId/genres', async(req, res) => {
 });
 
 
-
-
 router.get('/:userId/book/:bookId/posts', async(req, res)=> {
     const userId = req.params.userId;
     const bookId = req.params.bookId;
@@ -65,7 +63,7 @@ router.get('/:userId/book/:bookId/posts', async(req, res)=> {
     const posts = await Post.find({ user: userId, book: bookId });
 
     res.send(posts)
-    res.render('post_detail', {book, user, posts})
+    // res.render('post_detail', {book, user, posts})
  
 })
 
