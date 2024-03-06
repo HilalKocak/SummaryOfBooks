@@ -6,6 +6,10 @@
 - Node.js
 - MongoDB and Mongoose
 
+#### You can try deployed app with the link:
+```
+https://frontend-v7l54nf5ga-ew.a.run.app/users/65e8b7fda334b5584cc8ef26
+```
 #### Uml Diagram using PUML
 ![Uml Diagram](summary-book-cd.png)
 

@@ -1,0 +1,100 @@
+POST https://backend-v7l54nf5ga-ew.a.run.app/users HTTP/1.1
+content-type: application/json
+
+{"name":"Hilal Kocak", "email":"ab@com", "phone":1213}
+
+###
+
+GET http://localhost:3000/users/65cd256c7b35ae2c83f87f3a HTTP/1.1
+
+
+###
+DELETE http://localhost:3000/users/65c9d7b816b605025a5c08ef HTTP/1.1
+
+###
+PATCH http://localhost:3000/users/65d79bffb27031fdb47843a8 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "new name"
+}
+
+###
+POST http://localhost:3000/users/65d7a1ae833dd19438f609f4/book HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Self Love",
+    "author": "Jane Doe",
+    "genreId": "65e2eb2b51064624cbd11e31"
+}
+
+###
+POST http://localhost:3000/users/65cd25b07b35ae2c83f87f3f/genre HTTP/1.1
+content-type: application/json
+
+{"name":"Literature"}
+
+###
+DELETE http://localhost:3000/books/delete-book/65cfa7b8217d8ab754ee4aba HTTP/1.1
+
+
+###
+
+GET http://localhost:3000/books HTTP/1.1
+
+
+###
+GET http://localhost:3000/books/65cfa6fc217d8ab754ee4aab HTTP/1.1
+
+###
+PATCH http://localhost:3000/users/65d795ae176c2cd291190135 HTTP/1.1
+content-type: application/json
+
+{"name": "Js Updated Name"}
+
+
+
+###
+GET http://localhost:3000/genres HTTP/1.1
+
+
+###
+GET http://localhost:3000/genres/65cf8d01d7b58f27e143d603 HTTP/1.1
+
+### 
+DELETE http://localhost:3000/genres/delete-genre/65cfb090a277ce1e35cce0e8 HTTP/1.1
+
+###
+PATCH http://localhost:3000/genres/65cfb07ba277ce1e35cce0e4 HTTP/1.1
+content-type: application/json
+
+{"name": "Updated genre name"}
+
+###
+POST http://localhost:3000/users/65d7a1ae833dd19438f609f4/post HTTP/1.1
+content-type: application/json
+
+{"quote":"The greater danger for most of us lies not in setting our aim too high and falling short; but in setting our aim too low and achieving our mark.",
+ "bookId": "65e2eb7051064624cbd11e3c"
+}
+
+
+###
+GET http://localhost:3000/posts HTTP/1.1
+
+###
+GET http://localhost:3000/posts/65cfb632bf13c60060f8deff HTTP/1.1
+
+### 
+DELETE http://localhost:3000/posts/delete-post/65cfb8b10cac17da8dc8a842 HTTP/1.1
+
+
+###
+PATCH http://localhost:3000/posts/65cfb8ee0cac17da8dc8a84b HTTP/1.1
+content-type: application/json
+
+{"quote": "It will stay"}
+
+###
+GET http://localhost:3000/users/65cd25a57b35ae2c83f87f3d/book/65cfa6fc217d8ab754ee4aab/posts HTTP/1.1
