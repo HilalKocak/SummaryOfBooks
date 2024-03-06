@@ -10,6 +10,13 @@
 ```
 https://frontend-v7l54nf5ga-ew.a.run.app/users/65e8b7fda334b5584cc8ef26
 ```
+
+#### This is the preview of the application:
+![Screenshot of deployed app](preview/preview1.png)
+
+#### When click the user name:
+![Screenshot of deployed app](preview/preview2.png)
+
 #### Uml Diagram using PUML
 ![Uml Diagram](summary-book-cd.png)
 
